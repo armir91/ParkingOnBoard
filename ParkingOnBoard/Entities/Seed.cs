@@ -15,7 +15,7 @@ public class Seed
                 Name = "Rruga Sitki Cico",
                 Sides = 2,
                 IsActive = true,
-                TotalSlots = 10,
+                TotalSlots = 6,
                 Slots = new List<Slot>
                 {
                     new Slot
@@ -45,7 +45,7 @@ public class Seed
                 Name = "Rruga Pjeter Budi",
                 Sides = 1,
                 IsActive = true,
-                TotalSlots = 5,
+                TotalSlots = 7,
                 Slots = new List<Slot>
                 {
                     new Slot
@@ -100,6 +100,130 @@ public class Seed
                 TotalSlots = 6,
                 Slots = new List<Slot>
                 {
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    }
+                }
+            },
+            new Street
+            {
+                Name = "Rruga Kinostudio",
+                Sides = 2,
+                IsActive = true,
+                TotalSlots = 8,
+                Slots = new List<Slot>
+                {
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    }
+                }
+            },
+            new Street
+            {
+                Name = "Rruga Kombinati",
+                Sides = 1,
+                IsActive = true,
+                TotalSlots = 10,
+                Slots = new List<Slot>
+                {
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    }
+                }
+            },
+            new Street
+            {
+                Name = "Rruga Myslim Shyri",
+                Sides = 1,
+                IsActive = true,
+                TotalSlots = 15,
+                Slots = new List<Slot>
+                {
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    }
+                }
+            },
+            new Street
+            {
+                Name = "Rruga Islam Alla",
+                Sides = 2,
+                IsActive = true,
+                TotalSlots = 20,
+                Slots = new List<Slot>
+                {
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    },
+                    new Slot
+                    {
+                        IsActive = true
+                    },
                     new Slot
                     {
                         IsActive = true
