@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using ParkingOnBoard.Context;
 using ParkingOnBoard.Entities;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 using (DataContext context = new DataContext())
 {
@@ -62,27 +64,44 @@ do
                 {
                     case "a":
                         Console.Clear();
-                        Console.WriteLine("Option 'a' - Add a new street selected:");
+                        Console.WriteLine("Option 'a' - Add a new street selected:\n");
 
                         using (DataContext context = new DataContext())
                         {
                             try
                             {
-                                Console.WriteLine("Street Name:");
+
+                                Console.WriteLine("Please specify a name for the street: ");
                                 string name = Console.ReadLine();
-                                int sides;
-                                do
+
+                                while (string.IsNullOrEmpty(name))
                                 {
-                                    Console.WriteLine("Number of sides(select 1 or 2):");
-                                    sides = Convert.ToInt32(Console.ReadLine());
+                                    Console.Clear();
+                                    Console.WriteLine("Please try again by inputing the correct format!");
+                                }
 
-                                } while (sides < 1 || sides > 2);
+
+
+                                Console.WriteLine("Number of sides(select 1 or 2):");
+                                int sides;
+                                while (!int.TryParse(Console.ReadLine(), out sides) || sides < 1 || sides > 2)
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine("You entered an invalid number(options 1 or 2 only).");
+                                    Console.WriteLine("Retry again!");
+                                }
                                 
-
                                 bool isActive = true;
 
-                                Console.WriteLine("Total slots number:");
-                                int totalSlots = Convert.ToInt32(Console.ReadLine());
+                                
+                                Console.WriteLine("Please input the total slot number:");
+                                int totalSlots;
+                                while (!int.TryParse(Console.ReadLine(), out totalSlots) || totalSlots < 1 || totalSlots > 20)
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine("You entered an invalid number(please input only numbers from 1 to 20).");
+                                    Console.WriteLine("Retry again!");
+                                }
 
                                 var street = new Street
                                 {
@@ -115,10 +134,32 @@ do
                         {
                             try
                             {
-                                Console.WriteLine("Please specify a few characters of the street you want to close: ");
-                                string name = Console.ReadLine();
+                                string name;
+                                bool hasSpecialCharacters = false;
+                                do
+                                {
 
-                                var searchResult = context.Streets.Where(x => x.Name.Contains(name) && x.IsActive == true).ToList();
+                                    Console.WriteLine("Please specify a few characters of the street you want to close in order to first find it(or click enter to list all the streets): ");
+                                    name = Console.ReadLine();
+
+                                    // Define the regular expression pattern to allow only alphanumeric characters
+                                    Regex regex = new Regex("^[a-zA-Z0-9 ]*$");
+
+                                    if (regex.IsMatch(name))
+                                    {
+                                        // Your logic if the input is valid
+                                        Console.WriteLine("Searching for matches: " + name + "\n");
+                                        hasSpecialCharacters = false;
+                                    }
+                                    else
+                                    {
+                                        // Your logic if the input contains special characters
+                                        Console.WriteLine("Input contains special characters. Please try again.");
+                                        hasSpecialCharacters = true;
+                                    }
+                                } while (hasSpecialCharacters);
+
+                            var searchResult = context.Streets.Where(x => x.Name.Contains(name) && x.IsActive == true).ToList();
 
                                 
                                 if (searchResult.Count() > 0)
@@ -131,13 +172,20 @@ do
                                     }
 
                                     Console.WriteLine("Please select which of the above results you want to close(input ID)?");
-                                    var selection = Convert.ToInt32(Console.ReadLine());
+                                    int selection;
+                                    while (!int.TryParse(Console.ReadLine(), out selection))
+                                    {
+                                        
+                                        Console.WriteLine("You entered an invalid value.");
+                                        Console.WriteLine("Retry again!");
+                                    }
 
                                     context.Streets.Where(s => selection == s.Id).ToList().ForEach(x => x.IsActive = false);
                                     context.SaveChanges();
 
                                     Console.WriteLine($"The street with ID: {selection} closed successfully.");
                                 }
+                                
                             }
                             catch (Exception e)
                             {
@@ -168,7 +216,13 @@ do
                                 }
 
                                 Console.WriteLine("Please select which of the above results you want to validate(input ID)?");
-                                var selection = Convert.ToInt32(Console.ReadLine());
+                                int selection;
+                                while (!int.TryParse(Console.ReadLine(), out selection))
+                                {
+
+                                    Console.WriteLine("You entered an invalid value.");
+                                    Console.WriteLine("Retry again!");
+                                }
 
                                 context.Streets.Where(s => selection == s.Id).ToList().ForEach(x => x.IsActive = true);
                                 context.SaveChanges();
@@ -221,8 +275,31 @@ do
                         {
                             try
                             {
-                                Console.WriteLine("Please specify a few characters of the street name you want to add the slot to: ");
-                                string name = Console.ReadLine();
+
+                                string name;
+                                bool hasSpecialCharacters = false;
+                                do
+                                {
+
+                                    Console.WriteLine("Please specify a few characters of the street you want to close in order to first find it(or click enter to list all the streets): ");
+                                    name = Console.ReadLine();
+
+                                    // Define the regular expression pattern to allow only alphanumeric characters
+                                    Regex regex = new Regex("^[a-zA-Z0-9 ]*$");
+
+                                    if (regex.IsMatch(name))
+                                    {
+                                        // Your logic if the input is valid
+                                        Console.WriteLine("Searching for matches: " + name + "\n");
+                                        hasSpecialCharacters = false;
+                                    }
+                                    else
+                                    {
+                                        // Your logic if the input contains special characters
+                                        Console.WriteLine("Input contains special characters. Please try again.\n");
+                                        hasSpecialCharacters = true;
+                                    }
+                                } while (hasSpecialCharacters);
 
                                 var searchResult = context.Streets.Where(x => x.Name.Contains(name) && x.IsActive == true).ToList();
 
@@ -236,7 +313,13 @@ do
                                     }
 
                                     Console.WriteLine("Please select in which street you want to add a slot(please input ID)?");
-                                    var selection = Convert.ToInt32(Console.ReadLine());
+                                    int selection;
+                                    while (!int.TryParse(Console.ReadLine(), out selection))
+                                    {
+
+                                        Console.WriteLine("You entered an invalid value.");
+                                        Console.WriteLine("Retry again!");
+                                    }
 
                                     var slot = new Slot
                                     {
@@ -285,7 +368,14 @@ do
                                 }
 
                                 Console.WriteLine("Please specify the slot ID you wish to remove(delete): ");
-                                var selection = Convert.ToInt32(Console.ReadLine());
+                                int selection;
+                                while (!int.TryParse(Console.ReadLine(), out selection))
+                                {
+
+                                    Console.WriteLine("You entered an invalid value.");
+                                    Console.WriteLine("Retry again!");
+                                }
+
 
                                 context.Slots.Where(s => selection == s.Id).ToList().ForEach(x => x.IsDeleted = true);
                                 context.Slots.Where(s => selection == s.Id).ToList().ForEach(x => x.IsActive = false);
@@ -328,7 +418,14 @@ do
                                 }
 
                                 Console.WriteLine("Please specify the slot ID you wish to close(make it InActive): ");
-                                var selection = Convert.ToInt32(Console.ReadLine());
+
+                                int selection;
+                                while (!int.TryParse(Console.ReadLine(), out selection))
+                                {
+
+                                    Console.WriteLine("You entered an invalid value.");
+                                    Console.WriteLine("Retry again!");
+                                }
 
                                 context.Slots.Where(s => selection == s.Id).ToList().ForEach(x => x.IsActive = false);
                                 context.SaveChanges();
@@ -370,7 +467,14 @@ do
                                 }
 
                                 Console.WriteLine("Please specify the slot ID you wish to validate(set to Active): ");
-                                var selection = Convert.ToInt32(Console.ReadLine());
+
+                                int selection;
+                                while (!int.TryParse(Console.ReadLine(), out selection))
+                                {
+
+                                    Console.WriteLine("You entered an invalid value.");
+                                    Console.WriteLine("Retry again!");
+                                }
 
                                 context.Slots.Where(s => selection == s.Id).ToList().ForEach(x => x.IsActive = true);
                                 context.SaveChanges();
@@ -413,7 +517,8 @@ do
                     case "a":
                         Console.Clear();
                         Console.WriteLine("Option 'a' selected - Park");
-                        Console.WriteLine("Below you can view a list of streets with available parking slots: ");
+                        Console.WriteLine("Please let us know the street in which you want to park in order to see if there ia any free slot available:\n");
+                        Console.WriteLine("If you don't have an option in mind, please press '*' in order for us to print a list with all available free spots:\n");
                         readResult = Convert.ToString(Console.ReadLine());
 
                         using (DataContext context = new DataContext())
@@ -434,14 +539,30 @@ do
                                               }).Where(x => x.IsDeleted == false && x.IsActive == true && x.IsOccupied != true);
 
 
+                                if (readResult == "*")
+                                {
+                                    result = result;
+                                }else
+                                {
+                                    result = result.Where(x => x.Name.Contains(readResult));
+                                }
+
+
+
                                 Console.WriteLine("Slot ID:\tOccupied:\tStreet Name:");
                                 foreach (var item in result)
                                 {
                                     Console.WriteLine($"{item.Id}\t\t{item.IsOccupied}\t\t{item.Name}");
                                 }
 
-                                Console.WriteLine("Please specifi in which of the listed streets you wish to park by specifying the ID of the slot: ");
-                                var selection = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine("Please specify in which of the listed streets you wish to park by specifying the ID of the slot: ");
+                                int selection;
+                                while (!int.TryParse(Console.ReadLine(), out selection))
+                                {
+
+                                    Console.WriteLine("You entered an invalid value.");
+                                    Console.WriteLine("Retry again!");
+                                }
 
                                 context.Slots.Where(s => selection == s.Id).ToList().ForEach(x => x.IsOccupied = true);
                                 context.SaveChanges();
@@ -487,7 +608,13 @@ do
                                 }
 
                                 Console.WriteLine("Please specifi in which of the listed streets you wish to park by specifying the ID of the slot: ");
-                                var selection = Convert.ToInt32(Console.ReadLine());
+                                int selection;
+                                while (!int.TryParse(Console.ReadLine(), out selection))
+                                {
+
+                                    Console.WriteLine("You entered an invalid value.");
+                                    Console.WriteLine("Retry again!");
+                                }
 
                                 context.Slots.Where(s => selection == s.Id).ToList().ForEach(x => x.IsOccupied = false);
                                 context.SaveChanges();
