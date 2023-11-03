@@ -5,15 +5,14 @@ using ParkingOnBoard.Entities;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-using (DataContext context = new DataContext())
-{
-    context.Database.Migrate();
-}
 
-// seed initial data in the database
+
+
+//apply migrations and seed initial data in the database
 try
 {
-    using DataContext context = new DataContext();
+    using DataContext context = new();
+    context.Database.Migrate();
     await Seed.SeedData(context);
 }
 catch (Exception)
@@ -66,7 +65,7 @@ do
                         Console.Clear();
                         Console.WriteLine("Option 'a' - Add a new street selected:\n");
 
-                        using (DataContext context = new DataContext())
+                        using (DataContext context = new())
                         {
                             try
                             {
@@ -130,7 +129,7 @@ do
                         Console.Clear();
                         Console.WriteLine("Option 'b' - Close a street selected:");
                         
-                        using (DataContext context = new DataContext())
+                        using (DataContext context = new())
                         {
                             try
                             {
@@ -143,7 +142,7 @@ do
                                     name = Console.ReadLine();
 
                                     // Define the regular expression pattern to allow only alphanumeric characters
-                                    Regex regex = new Regex("^[a-zA-Z0-9 ]*$");
+                                    Regex regex = new("^[a-zA-Z0-9 ]*$");
 
                                     if (regex.IsMatch(name))
                                     {
@@ -162,7 +161,7 @@ do
                             var searchResult = context.Streets.Where(x => x.Name.Contains(name) && x.IsActive == true).ToList();
 
                                 
-                                if (searchResult.Count() > 0)
+                                if (searchResult.Count > 0)
                                 {
                                     Console.WriteLine("Found the below streets: ");
                                     Console.WriteLine("ID:\t Name:");
@@ -201,7 +200,7 @@ do
                         Console.Clear();
                         Console.WriteLine("Option 'c'- Street validation selected.");
 
-                        using (DataContext context = new DataContext())
+                        using (DataContext context = new())
                         {
                             try
                             {
@@ -271,7 +270,7 @@ do
                         Console.WriteLine("Option 'a' selected - Add a new parking slot to a specific street\n");
                         Console.WriteLine("In order to add a parking slot to a street, first you need to find the desired street: ");
 
-                        using (DataContext context = new DataContext())
+                        using (DataContext context = new())
                         {
                             try
                             {
@@ -285,7 +284,7 @@ do
                                     name = Console.ReadLine();
 
                                     // Define the regular expression pattern to allow only alphanumeric characters
-                                    Regex regex = new Regex("^[a-zA-Z0-9 ]*$");
+                                    Regex regex = new("^[a-zA-Z0-9 ]*$");
 
                                     if (regex.IsMatch(name))
                                     {
@@ -303,7 +302,7 @@ do
 
                                 var searchResult = context.Streets.Where(x => x.Name.Contains(name) && x.IsActive == true).ToList();
 
-                                if (searchResult.Count() > 0)
+                                if (searchResult.Count > 0)
                                 {
                                     Console.WriteLine("Found the below streets: \n");
                                     Console.WriteLine("ID:\t Name:");
@@ -347,7 +346,7 @@ do
                         Console.Clear();
                         Console.WriteLine("Option 'b' selected - Remove a parking slot from a specific street\n");
                         Console.WriteLine("Below you can view all of the Slot ID-s and the streets that belong to: \n");
-                        using (DataContext context = new DataContext())
+                        using (DataContext context = new())
                         {
                             try
                             {
@@ -396,7 +395,7 @@ do
                         Console.Clear();
                         Console.WriteLine("Option 'c' selected - Close a parking Slot.");
                         Console.WriteLine("Below you can view all of the Slot ID-s and the streets that belong to: \n");
-                        using (DataContext context = new DataContext())
+                        using (DataContext context = new())
                         {
                             try
                             {
@@ -445,7 +444,7 @@ do
                         Console.Clear();
                         Console.WriteLine("Option 'd' selected - Validate a parking slot");
                         Console.WriteLine("Below you can view all of the Slot ID-s and it's corresponding street that can be validated: \n");
-                        using (DataContext context = new DataContext())
+                        using (DataContext context = new())
                         {
                             try
                             {
@@ -521,7 +520,7 @@ do
                         Console.WriteLine("If you don't have an option in mind, please press '*' in order for us to print a list with all available free spots:\n");
                         readResult = Convert.ToString(Console.ReadLine());
 
-                        using (DataContext context = new DataContext())
+                        using (DataContext context = new())
                         {
                             try
                             {
@@ -583,7 +582,7 @@ do
                         Console.WriteLine("Option 'b' selected - UnPark");
                         Console.WriteLine("Below you can view a list of the occupied slots:\n");
 
-                        using (DataContext context = new DataContext())
+                        using (DataContext context = new())
                         {
                             try
                             {
