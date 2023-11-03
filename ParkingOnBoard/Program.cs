@@ -19,8 +19,7 @@ do
     ApplicationMenu.MainMenu();
 
     readResult = Console.ReadLine();
-    if (readResult != null)
-        menuSelection = readResult.ToLower();
+    menuSelection = readResult.ToLower();
 
     switch (menuSelection)
     {
@@ -28,35 +27,33 @@ do
             do
             {
                 StreetManagementMenu.StreetManagement();
-
                 readResult = Console.ReadLine();
-                if (readResult != null)
-                    menuSelection = readResult.ToLower();
+                menuSelection = readResult.ToLower();
 
                 switch (menuSelection)
                 {
                     case "a":
 
                         StreetOperationCreate.CreateStreet();
-
-                        Console.WriteLine("\n\rPress the Enter key to continue");
+                        EndOfApplicationMessage.EndMessage();
                         readResult = Console.ReadLine();
+
                         break;
 
                     case "b":
 
                         StreetOperationClose.CloseStreet();
-
-                        Console.WriteLine("\n\rPress the Enter key to continue");
+                        EndOfApplicationMessage.EndMessage();
                         readResult = Console.ReadLine();
+
                         break;
 
                     case "c":
 
                         StreetOperationValidate.ValidateStreet();
-
-                        Console.WriteLine("\n\rPress the Enter key to continue");
+                        EndOfApplicationMessage.EndMessage();
                         readResult = Console.ReadLine();
+
                         break;
                 }
 
@@ -68,57 +65,54 @@ do
             do
             {
                 SlotManagementMenu.SlotManagement();
-
                 readResult = Console.ReadLine();
-                if (readResult != null)
-                    menuSelection = readResult.ToLower();
+                menuSelection = readResult.ToLower();
 
                 switch (menuSelection)
                 {
                     case "a":
 
                         SlotOperationCreate.CreateSlot();
-
-                        Console.WriteLine("\n\rPress the Enter key to continue");
+                        EndOfApplicationMessage.EndMessage();
                         readResult = Console.ReadLine();
+
                         break;
                     case "b":
 
                         SlotOperationRemove.RemoveSlot();
-
-                        Console.WriteLine("\n\rPress the Enter key to continue");
+                        EndOfApplicationMessage.EndMessage();
                         readResult = Console.ReadLine();
+
                         break;
                     case "c":
 
                         SlotOperationClose.CloseSlot();
-
-                        Console.WriteLine("\n\rPress the Enter key to continue");
+                        EndOfApplicationMessage.EndMessage();
                         readResult = Console.ReadLine();
+
                         break;
                     case "d":
 
                         SlotOperationValidate.ValidateSlot();
-
-                        Console.WriteLine("\n\rPress the Enter key to continue");
+                        EndOfApplicationMessage.EndMessage();
                         readResult = Console.ReadLine();
+
                         break;
                 }
 
             } while (menuSelection != "exit");
 
-            Console.WriteLine("\n\rPress the Enter key to continue");
+            EndOfApplicationMessage.EndMessage();
             readResult = Console.ReadLine();
+
             break;
         case "3":
 
             do
             {
                 ParkingMenuOption.ParkingMenu();
-
                 readResult = Console.ReadLine();
-                if (readResult != null)
-                    menuSelection = readResult.ToLower();
+                menuSelection = readResult.ToLower();
 
                 switch (menuSelection)
                 {
@@ -183,23 +177,24 @@ do
                             }
                         };
 
-                        Console.WriteLine("\n\rPress the Enter key to continue");
+                        EndOfApplicationMessage.EndMessage();
                         readResult = Console.ReadLine();
+
                         break;
                     case "b":
 
                         ParkingOperationUnpark.Unpark();
-
-                        Console.WriteLine("\n\rPress the Enter key to continue");
+                        EndOfApplicationMessage.EndMessage();
                         readResult = Console.ReadLine();
+
                         break;
                 }
 
             } while (menuSelection != "exit");
 
-            Console.WriteLine("\n\rPress the Enter key to continue");
+            EndOfApplicationMessage.EndMessage();
             readResult = Console.ReadLine();
+
             break;
     }
-
 } while (menuSelection != "exit");

@@ -22,6 +22,7 @@ public static class StreetOperationCreate
                 {
                     Console.Clear();
                     Console.WriteLine("Please try again by inputing the correct format!");
+                    name = Console.ReadLine();
                 }
 
 
