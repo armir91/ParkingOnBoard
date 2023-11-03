@@ -1,6 +1,6 @@
-﻿using ParkingOnBoard.Context;
+﻿using ParkingOnBoard.Entities;
 
-namespace ParkingOnBoard.Entities;
+namespace ParkingOnBoard.Context;
 
 public class Seed
 {
@@ -63,7 +63,7 @@ public class Seed
                 }
             },
             new Street
-            {   
+            {
                 Name = "Rruga Petro Nini",
                 Sides = 2,
                 IsActive = true,
