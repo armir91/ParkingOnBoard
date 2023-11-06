@@ -35,13 +35,8 @@ public static class ParkingOperationUnpark
                 }
 
                 Console.WriteLine("Please specifi in which of the listed streets you wish to park by specifying the ID of the slot: ");
-                int selection;
-                while (!int.TryParse(Console.ReadLine(), out selection))
-                {
 
-                    Console.WriteLine("You entered an invalid value.");
-                    Console.WriteLine("Retry again!");
-                }
+                int selection = ValidateSelection.ValidateUserInput();
 
                 context.Slots.Where(s => selection == s.Id).ToList().ForEach(x => x.IsOccupied = false);
                 context.SaveChanges();

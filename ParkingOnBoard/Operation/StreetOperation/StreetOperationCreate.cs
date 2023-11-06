@@ -1,5 +1,6 @@
 ﻿using ParkingOnBoard.Context;
 using ParkingOnBoard.Entities;
+using ParkingOnBoard.Operation.StreetOperation.InputValidation;
 
 namespace ParkingOnBoard.Operations.StreetOperation;
 
@@ -14,39 +15,16 @@ public static class StreetOperationCreate
         {
             try
             {
-
                 Console.WriteLine("Please specify a name for the street: ");
-                string name = Console.ReadLine();
-
-                while (string.IsNullOrEmpty(name))
-                {
-                    Console.Clear();
-                    Console.WriteLine("Please try again by inputing the correct format!");
-                    name = Console.ReadLine();
-                }
-
-
+                string name = StreetUserInput.NameInput();
 
                 Console.WriteLine("Number of sides(select 1 or 2):");
-                int sides;
-                while (!int.TryParse(Console.ReadLine(), out sides) || sides < 1 || sides > 2)
-                {
-                    Console.Clear();
-                    Console.WriteLine("You entered an invalid number(options 1 or 2 only).");
-                    Console.WriteLine("Retry again!");
-                }
+                int sides = StreetUserInput.SidesInput();
 
                 bool isActive = true;
 
-
                 Console.WriteLine("Please input the total slot number:");
-                int totalSlots;
-                while (!int.TryParse(Console.ReadLine(), out totalSlots) || totalSlots < 1 || totalSlots > 20)
-                {
-                    Console.Clear();
-                    Console.WriteLine("You entered an invalid number(please input only numbers from 1 to 20).");
-                    Console.WriteLine("Retry again!");
-                }
+                int totalSlots = StreetUserInput.TotalSlotsInput();
 
                 var street = new Street
                 {
@@ -58,7 +36,6 @@ public static class StreetOperationCreate
 
                 context.Add(street);
                 context.SaveChanges();
-
 
                 Console.WriteLine("Street created successfully!");
             }

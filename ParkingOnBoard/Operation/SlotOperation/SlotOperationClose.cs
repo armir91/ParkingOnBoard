@@ -33,13 +33,7 @@ public static class SlotOperationClose
                 Console.WriteLine();
                 Console.WriteLine("Please specify the slot ID you wish to close(make it InActive): ");
 
-                int selection;
-                while (!int.TryParse(Console.ReadLine(), out selection))
-                {
-
-                    Console.WriteLine("You entered an invalid value.");
-                    Console.WriteLine("Retry again!");
-                }
+                int selection = ValidateSelection.ValidateUserInput();
 
                 context.Slots.Where(s => selection == s.Id).ToList().ForEach(x => x.IsActive = false);
                 context.SaveChanges();

@@ -30,13 +30,8 @@ public static class SlotOperationRemove
                 }
 
                 Console.WriteLine("Please specify the slot ID you wish to remove(delete): ");
-                int selection;
-                while (!int.TryParse(Console.ReadLine(), out selection))
-                {
 
-                    Console.WriteLine("You entered an invalid value.");
-                    Console.WriteLine("Retry again!");
-                }
+                int selection = ValidateSelection.ValidateUserInput();
 
 
                 context.Slots.Where(s => selection == s.Id).ToList().ForEach(x => x.IsDeleted = true);

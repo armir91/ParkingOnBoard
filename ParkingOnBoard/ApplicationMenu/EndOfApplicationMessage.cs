@@ -11,6 +11,7 @@ namespace ParkingOnBoard.ApplicationMenu
         public static void EndMessage()
         {
             Console.WriteLine("\n\rPress the Enter key to continue");
+            Console.ReadLine();
         }
     }
 }
