@@ -1,4 +1,5 @@
 ﻿using ParkingOnBoard.Context;
+using ParkingOnBoard.Operation;
 using System.Text.RegularExpressions;
 
 namespace ParkingOnBoard.Operations.StreetOperation;
@@ -15,31 +16,17 @@ public static class StreetOperationClose
             try
             {
                 string name;
-                bool hasSpecialCharacters = false;
-                do
+
+                Console.WriteLine("Please specify a few characters of the street you want to close in order to first find it: ");
+                name = Console.ReadLine();
+
+                while (!ValidateRegEx.ValidateName(name))
                 {
-
-                    Console.WriteLine("Please specify a few characters of the street you want to close in order to first find it(or click enter to list all the streets): ");
+                    Console.WriteLine("Input contains special characters or numbers.\nPlease try again.\n");
                     name = Console.ReadLine();
+                }
 
-                    // Define the regular expression pattern to allow only alphanumeric characters
-                    Regex regex = new("^[a-zA-Z0-9 ]*$");
-
-                    if (regex.IsMatch(name))
-                    {
-                        // Your logic if the input is valid
-                        Console.WriteLine("Searching for matches: " + name + "\n");
-                        hasSpecialCharacters = false;
-                    }
-                    else
-                    {
-                        // Your logic if the input contains special characters
-                        Console.WriteLine("Input contains special characters. Please try again.");
-                        hasSpecialCharacters = true;
-                    }
-                } while (hasSpecialCharacters);
-
-                var searchResult = context.Streets.Where(x => x.Name.Contains(name) && x.IsActive == true).ToList();
+                    var searchResult = context.Streets.Where(x => x.Name.Contains(name) && x.IsActive == true).ToList();
 
 
                 if (searchResult.Count > 0)
