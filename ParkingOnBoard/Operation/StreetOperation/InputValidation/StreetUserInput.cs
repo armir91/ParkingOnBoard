@@ -6,10 +6,9 @@ public static class StreetUserInput
     {
         string name = Console.ReadLine();
 
-        while (string.IsNullOrEmpty(name))
+        while (string.IsNullOrEmpty(name) || !ValidateRegEx.ValidateName(name))
         {
-            Console.Clear();
-            Console.WriteLine("Please try again by inputing the correct format!");
+            Console.WriteLine("Please try again by inputing the correct format of a name(no special characters allowed)!");
             name = Console.ReadLine();
         }
         return name;
@@ -20,7 +19,6 @@ public static class StreetUserInput
         int sides;
         while (!int.TryParse(Console.ReadLine(), out sides) || sides < 1 || sides > 2)
         {
-            Console.Clear();
             Console.WriteLine("You entered an invalid number(options 1 or 2 only).");
             Console.WriteLine("Retry again!");
         }
@@ -32,7 +30,6 @@ public static class StreetUserInput
         int totalSlots;
         while (!int.TryParse(Console.ReadLine(), out totalSlots) || totalSlots < 1 || totalSlots > 20)
         {
-            Console.Clear();
             Console.WriteLine("You entered an invalid number(please input only numbers from 1 to 20).");
             Console.WriteLine("Retry again!");
         }
