@@ -24,13 +24,8 @@ public static class StreetOperationValidate
                 }
 
                 Console.WriteLine("Please select which of the above results you want to validate(input ID)?");
-                int selection;
-                while (!int.TryParse(Console.ReadLine(), out selection))
-                {
 
-                    Console.WriteLine("You entered an invalid value.");
-                    Console.WriteLine("Retry again!");
-                }
+                int selection = ValidateSelection.ValidateUserInput();
 
                 context.Streets.Where(s => selection == s.Id).ToList().ForEach(x => x.IsActive = true);
                 context.SaveChanges();

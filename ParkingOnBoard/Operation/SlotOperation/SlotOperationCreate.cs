@@ -22,7 +22,7 @@ public static class SlotOperationCreate
                 do
                 {
 
-                    Console.WriteLine("Please specify a few characters of the street you want to close in order to first find it(or click enter to list all the streets): ");
+                    Console.WriteLine("Please specify a few characters of the street in order to first find it(or click enter to list all the streets): ");
                     name = Console.ReadLine();
 
                     // Define the regular expression pattern to allow only alphanumeric characters
@@ -54,13 +54,8 @@ public static class SlotOperationCreate
                     }
                     Console.WriteLine();
                     Console.WriteLine("Please select in which street you want to add a slot(please input ID)?");
-                    int selection;
-                    while (!int.TryParse(Console.ReadLine(), out selection))
-                    {
 
-                        Console.WriteLine("You entered an invalid value.");
-                        Console.WriteLine("Retry again!");
-                    }
+                    int selection = ValidateSelection.ValidateUserInput();
 
                     var slot = new Slot
                     {

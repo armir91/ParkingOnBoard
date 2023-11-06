@@ -52,13 +52,8 @@ public static class StreetOperationClose
                     }
 
                     Console.WriteLine("Please select which of the above results you want to close(input ID)?");
-                    int selection;
-                    while (!int.TryParse(Console.ReadLine(), out selection))
-                    {
 
-                        Console.WriteLine("You entered an invalid value.");
-                        Console.WriteLine("Retry again!");
-                    }
+                    int selection = ValidateSelection.ValidateUserInput();
 
                     context.Streets.Where(s => selection == s.Id).ToList().ForEach(x => x.IsActive = false);
                     context.SaveChanges();
