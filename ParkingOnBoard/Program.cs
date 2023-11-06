@@ -5,7 +5,6 @@ using ParkingOnBoard.Operation.SlotOperation;
 using ParkingOnBoard.Operations.StreetOperation;
 
 
-
 //automating migrations + seed initial data in the DB
 AutoMigrateConfiguration.AutoMigrateAndSeed();
 

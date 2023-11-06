@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using ParkingOnBoard.Entities;
 
 namespace ParkingOnBoard.Context;
@@ -11,7 +12,6 @@ public class DataContext : DbContext
 
     public DataContext(DbContextOptions options) : base(options)
     {
-
     }
 
     public DbSet<Street> Streets { get; set; }
@@ -19,7 +19,9 @@ public class DataContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        base.OnConfiguring(optionsBuilder);
-        optionsBuilder.UseSqlServer("Server=localhost;Database=POB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
+        IConfigurationBuilder configurationBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
+        IConfiguration configuration = configurationBuilder.Build();
+
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("ConnectionString"));
     }
 }
