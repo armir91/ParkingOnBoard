@@ -1,5 +1,4 @@
-﻿using ParkingOnBoard;
-using ParkingOnBoard.ApplicationMenu;
+﻿using ParkingOnBoard.ApplicationMenu;
 using ParkingOnBoard.Context;
 using ParkingOnBoard.Operation.ParkingOperation;
 using ParkingOnBoard.Operation.SlotOperation;
